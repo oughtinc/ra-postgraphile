@@ -99,10 +99,9 @@ export const createGetListQuery = (
     ? gql`query ${manyLowerResourceName} (
           $offset: Int!,
           $first: Int!,
-          $filter: ${resourceTypename}Filter,
           $orderBy: [${resourceTypename}sOrderBy!]
           ) {
-              ${manyLowerResourceName}(first: $first, offset: $offset, filter: $filter, orderBy: $orderBy) {
+              ${manyLowerResourceName}(first: $first, offset: $offset, orderBy: $orderBy) {
               nodes {
                   ${createQueryFromType(
                     resourceTypename,
