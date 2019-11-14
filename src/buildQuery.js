@@ -55,7 +55,7 @@ export const buildQuery = (introspectionResults: Object, factory: Factory) => (
   switch (raFetchType) {
     case VERB_GET_ONE:
       return {
-        query: gql`query ${singleLowerResourceName}($id: Int!) {
+        query: gql`query ${singleLowerResourceName}($id: UUID!) {
             ${singleLowerResourceName}(id: $id) {
             ${createQueryFromType(
               resourceTypename,
@@ -256,9 +256,7 @@ export const buildQuery = (introspectionResults: Object, factory: Factory) => (
           .join(',')}) {
             ${inputs.map(input => {
               return `
-             update${input.id}:update${resourceTypename}(input: $arg${
-                input.id
-              }) {
+             update${input.id}:update${resourceTypename}(input: $arg${input.id}) {
                clientMutationId
              }
             `

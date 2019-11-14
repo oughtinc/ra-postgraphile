@@ -62,7 +62,7 @@ export const createGetManyQuery = (
 ) => {
   return implementsInterface(type, NODE_INTERFACE)
     ? gql`
-              query ${manyLowerResourceName}($ids: [Int!]) {
+              query ${manyLowerResourceName}($ids: [UUID!]) {
                   ${manyLowerResourceName}(filter: { id: { in: $ids }}) {
                   nodes {
                       ${createQueryFromType(
