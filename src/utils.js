@@ -90,18 +90,18 @@ export const createGetManyQuery = (
 
 export const createGetListQuery = (
   type: Object,
-  manyLowerResourceName: string,
+  allResourceName: string,
   resourceTypename: string,
   typeMap: Object,
   allowedTypes: Array<string>
 ) => {
   return implementsInterface(type, NODE_INTERFACE)
-    ? gql`query ${manyLowerResourceName} (
+    ? gql`query ${allResourceName} (
           $offset: Int!,
           $first: Int!,
           $orderBy: [${resourceTypename}sOrderBy!]
           ) {
-              ${manyLowerResourceName}(first: $first, offset: $offset, orderBy: $orderBy) {
+              ${allResourceName}(first: $first, offset: $offset, orderBy: $orderBy) {
               nodes {
                   ${createQueryFromType(
                     resourceTypename,
@@ -112,8 +112,8 @@ export const createGetListQuery = (
               totalCount
           }
           }`
-    : gql`query ${manyLowerResourceName}($offset: Int!, $first: Int!) {
-              ${manyLowerResourceName}(first: $first, offset: $offset) {
+    : gql`query ${allResourceName}($offset: Int!, $first: Int!) {
+              ${allResourceName}(first: $first, offset: $offset) {
               nodes {
                   ${createQueryFromType(
                     resourceTypename,

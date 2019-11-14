@@ -8,7 +8,7 @@ import { createFilter } from './filters'
 export const getManyReference = (
   params: ManyReferenceParams,
   type: Object,
-  manyLowerResourceName: string,
+  manyLowerResallResourceNameourceName: string,
   resourceTypename: string,
   typeMap: Object,
   allowedTypes: Array<string>
@@ -21,7 +21,7 @@ export const getManyReference = (
   return {
     query: createGetListQuery(
       type,
-      manyLowerResourceName,
+      allResourceName,
       resourceTypename,
       typeMap,
       allowedTypes
@@ -33,7 +33,7 @@ export const getManyReference = (
       orderBy
     },
     parseResponse: (response: Response) => {
-      const { nodes, totalCount } = response.data[manyLowerResourceName]
+      const { nodes, totalCount } = response.data[allResourceName]
       return {
         data: nodes,
         total: totalCount

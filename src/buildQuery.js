@@ -52,6 +52,7 @@ export const buildQuery = (introspectionResults: Object, factory: Factory) => (
   const type = typeMap[resourceTypename]
   const manyLowerResourceName = `${lowercase(resourceTypename)}s`
   const singleLowerResourceName = lowercase(resourceTypename)
+  const allResourceName = `all${resourceTypename}s`
   switch (raFetchType) {
     case VERB_GET_ONE:
       return {
@@ -94,7 +95,7 @@ export const buildQuery = (introspectionResults: Object, factory: Factory) => (
       return getManyReference(
         params,
         type,
-        manyLowerResourceName,
+        allResourceName,
         resourceTypename,
         typeMap,
         allowedComplexTypes
@@ -108,7 +109,7 @@ export const buildQuery = (introspectionResults: Object, factory: Factory) => (
       return {
         query: createGetListQuery(
           type,
-          manyLowerResourceName,
+          allResourceName,
           resourceTypename,
           typeMap,
           allowedComplexTypes
